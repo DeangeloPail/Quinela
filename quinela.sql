@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-06-2023 a las 15:40:44
+-- Tiempo de generación: 12-06-2023 a las 08:42:42
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -33,6 +33,14 @@ CREATE TABLE `competicion` (
   `logo_competici` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `competicion`
+--
+
+INSERT INTO `competicion` (`cod_competicion`, `nom_competicion`, `logo_competici`) VALUES
+(1, 'Premier League', 'Premier_league.png'),
+(2, 'La Liga Santander', 'LaLiga_santander.png');
+
 -- --------------------------------------------------------
 
 --
@@ -44,6 +52,14 @@ CREATE TABLE `equipo` (
   `nom_equipo` varchar(250) NOT NULL,
   `logo_equipo` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `equipo`
+--
+
+INSERT INTO `equipo` (`cod_equipo`, `nom_equipo`, `logo_equipo`) VALUES
+(1, 'Real Madrid', 'Real_madrid.png'),
+(2, 'FC Barcelona', 'FC_Barcelona.png');
 
 -- --------------------------------------------------------
 
@@ -57,8 +73,15 @@ CREATE TABLE `partidos` (
   `ref_equi_loc` int(20) NOT NULL,
   `ref_equi_visi` int(20) NOT NULL,
   `fecha_prtido` date NOT NULL,
-  `resultado_prtido` varchar(25) NOT NULL
+  `resultado_prtido` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `partidos`
+--
+
+INSERT INTO `partidos` (`cod_partido`, `ref_competicion`, `ref_equi_loc`, `ref_equi_visi`, `fecha_prtido`, `resultado_prtido`) VALUES
+(1, 2, 1, 2, '2023-06-13', NULL);
 
 -- --------------------------------------------------------
 
@@ -67,7 +90,7 @@ CREATE TABLE `partidos` (
 --
 
 CREATE TABLE `tipo_usuario` (
-  `cod_tp_usu` int(3) NOT NULL,
+  `cod_tp_usu` varchar(20) NOT NULL,
   `tip_usuario` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -76,8 +99,8 @@ CREATE TABLE `tipo_usuario` (
 --
 
 INSERT INTO `tipo_usuario` (`cod_tp_usu`, `tip_usuario`) VALUES
-(1, 'Administrador'),
-(2, 'Cliente');
+('admin', 'Administrador'),
+('usuario', 'Cliente');
 
 -- --------------------------------------------------------
 
@@ -91,8 +114,16 @@ CREATE TABLE `usuario` (
   `contrasena` varchar(250) NOT NULL,
   `correo_elec` varchar(250) NOT NULL,
   `num_telefono` varchar(250) NOT NULL,
-  `ref_tp_usurio` int(20) DEFAULT NULL
+  `ref_tp_usurio` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`cod_usuario`, `nom_usuario`, `contrasena`, `correo_elec`, `num_telefono`, `ref_tp_usurio`) VALUES
+(1, 'administrador', '123456', 'correo@correo.com', '0412-6420093', 'admin'),
+(2, 'cliente', '123456', 'correo@correo.com', '0412-6420093', 'usuario');
 
 --
 -- Índices para tablas volcadas
@@ -140,31 +171,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `competicion`
 --
 ALTER TABLE `competicion`
-  MODIFY `cod_competicion` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_competicion` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `cod_equipo` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_equipo` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `cod_partido` int(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `tipo_usuario`
---
-ALTER TABLE `tipo_usuario`
-  MODIFY `cod_tp_usu` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cod_partido` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `cod_usuario` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_usuario` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
