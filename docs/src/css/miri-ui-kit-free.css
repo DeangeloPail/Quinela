@@ -3469,7 +3469,7 @@ input[type="button"].btn-block {
   word-wrap: break-word;
   background-color: #ffffff;
   background-clip: border-box;
-  border: 1px solid rgba(243, 169, 0);
+  border: 1px solid #000000;
   border-radius: 0.25rem; }
   .card > hr {
     margin-right: 0;
